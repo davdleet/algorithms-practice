@@ -3,7 +3,7 @@
 using namespace std;
 
 int main(){
-    //freopen("input.txt", "rt", stdin);
+    freopen("input.txt", "rt", stdin);
     int N;
     scanf("%d", &N);
     int count = 0;
@@ -22,5 +22,4 @@ int main(){
             }
         }
     }
-    cout << count;
 }
