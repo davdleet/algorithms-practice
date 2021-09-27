@@ -26,7 +26,7 @@ int binsearch(int left, int right, int target, vector<int> arr)
 
 int main()
 {
-    //freopen("input.txt", "rt", stdin);
+    freopen("input.txt", "rt", stdin);
     int N, M;
     cin >> N;
     cin >> M;
@@ -39,5 +39,8 @@ int main()
     }
     sort(arr.begin(), arr.end());
     int result = binsearch(0, arr.size(), M, arr);
-    cout << result + 1;
+    int result1 = binary_search(arr.begin(), arr.end(), M);
+    //built in only checks whether the element exists in the container
+    cout << "built in binsearch " << result1 << endl;
+    cout << "my binary search " << result + 1;
 }
