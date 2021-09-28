@@ -5,18 +5,23 @@ using namespace std;
 
 int main()
 {
-    //freopen("input.txt", "rt", stdin);
+    freopen("input.txt", "rt", stdin);
     int N, M;
     cin >> N >> M;
     vector<int> arr;
     int right = 0;
     int left = 1;
+    int max = 0;
     for (int i = 0; i < N; i++)
     {
         int num;
         cin >> num;
         right += num;
         arr.push_back(num);
+        if (arr[i] > max)
+        {
+            max = arr[i];
+        }
     }
     int middle = (right + left) / 2;
     int answer;
@@ -48,7 +53,7 @@ int main()
             count++;
         }
         //if middle value is big enough
-        if (count <= M)
+        if (middle >= max && count <= M)
         {
             answer = middle;
             right = middle - 1;
