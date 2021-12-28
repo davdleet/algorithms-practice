@@ -41,5 +41,9 @@ int main()
         cin >> arr[i];
     }
     int count = tree(1, 0);
+    if (count == 0)
+    {
+        count = -1;
+    }
     cout << count;
 }
