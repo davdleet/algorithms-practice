@@ -34,7 +34,7 @@ bool f(d a, d b)
 
 int main()
 {
-    freopen("input.txt", "rt", stdin);
+    // freopen("input.txt", "rt", stdin);
     ios::sync_with_stdio(0);
     cin.tie(0);
     int N;
