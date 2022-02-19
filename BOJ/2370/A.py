@@ -1,6 +1,40 @@
 import sys
-
+from bisect import bisect_left
 sys.stdin = open('D:\Projects\AA\BOJ\\2370\input.txt', 'r')
+# input = sys.stdin.readline
+
+# N = int(input().rstrip())
+
+# arr = []
+# pos = [0 for _ in range(10001)]
+
+
+# for i in range(N):
+#     pos[i] = list(map(int, input().rstrip().split()))
+#     arr.append(pos[i][0])
+#     arr.append(pos[i][1])
+
+# arr = list(set(arr))
+# arr.sort()
+
+# for i in range(N):
+#     pos[i][0] = 1 + bisect_left(arr, pos[i][0])
+#     pos[i][1] = 1 + bisect_left(arr, pos[i][1])
+
+# wall = [0 for _ in range(10000000)]
+# for i in range(N):
+#     for j in range(pos[i][0], pos[i][1] + 1):
+#         wall[j] = i + 1
+
+# ans = 0
+# chk = [False for _ in range(50001)]
+# for i in range(30001):
+#     if 0 < wall[i] and chk[wall[i]] == False:
+#         chk[wall[i]] = True
+#         ans += 1
+# print(ans)
+
+
 input = sys.stdin.readline
 
 N = int(input().rstrip())
@@ -48,8 +82,6 @@ for i in range(0, len(lines)):
     for j in range(d[l], d[r]+1):
         wall[j][1] = i
 
-print(wall)
-print(lines)
 for i in range(len(wall)):
     p = wall[i][1]
     if(p != -1):
