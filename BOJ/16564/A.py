@@ -9,6 +9,18 @@ arr = []
 for i in range(N):
     t = int(input().rstrip())
     arr.append(t)
-arr.sort()
 
-print(arr)
+hi = 1000000000
+lo = 0
+
+
+while lo + 1 < hi:
+    mid = (hi + lo) // 2
+    temp = 0
+    for i in range(N):
+        temp += max(mid - arr[i], 0)
+    if K < temp:
+        hi = mid
+    else:
+        lo = mid
+print(lo)
