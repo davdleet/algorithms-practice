@@ -3,6 +3,7 @@ import sys
 sys.stdin = open("D:\Projects\AA\BOJ\\10026\input.txt")
 input = sys.stdin.readline
 
+sys.setrecursionlimit(10**6)
 N = int(input().rstrip())
 
 arr = [[0 for _ in range(N+2)]for __ in range(N+2)]
