@@ -5,36 +5,59 @@ input = sys.stdin.readline
 
 N, M, B = map(int, input().rstrip().split())
 inventory = B
+min_time = 10**20
+ans_height = 0
 arr = []
+remove = 2
+add = 1
 
 for i in range(N):
     line = list(map(int, input().split()))
     arr.append(line)
 
-dir = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+min = 10**20
+max = 0
+for i in range(len(arr)):
+    for j in range(len(arr[i])):
+        a = arr[i][j]
+        if a > max:
+            max = a
+        if a < min:
+            min = a
 
-time = 0
 
-for i in range(N):
-    for j in range(M):
-        current = arr[i][j]
-        temp = [current]
-        for k in range(len(dir)):
-            a = dir[k][0]
-            b = dir[k][1]
-            if (i+a < 0 or i+a >= N) or (j+b < 0 or j+b >= M):
+for h in range(min, max+1):
+    time = 0
+    break_flag = False
+    inventory = B
+    for i in range(len(arr)):
+        for j in range(len(arr[i])):
+            current = arr[i][j]
+            diff = current - h
+            if diff == 0:
                 continue
-            temp.append(arr[i+a][j+b])
-        m = len(temp) // 2
-        temp.sort()
-        if current == temp[m]:
-            continue
-        elif current < temp[m]:
-            inventory -= (temp[m] - current)
-            arr[i][j] = current + (temp[m] - current)
-            time = time + abs(temp[m] - current) * 1
-        else:
-            inventory += (temp[m] - current)
-            arr[i][j] = current - (temp[m] - current)
-            time = time + abs(temp[m] - current) * 2
-print(time, arr[0][0])
+            # current land is higher
+            elif diff > 0:
+                time = time + (diff*remove)
+                inventory = inventory + (abs(diff))
+                print(f'inven: ${inventory}')
+            # current land is lower
+            else:
+                if inventory < abs(diff):
+                    break_flag = True
+                    break
+                time += (abs(diff)*add)
+                inventory -= (abs(diff))
+        if break_flag:
+            break
+    if h == 6:
+        print(min_time, h)
+    if break_flag:
+        continue
+    if time < min_time:
+        min_time = time
+        ans_height = h
+    elif time == min_time:
+        if h > ans_height:
+            ans_height = h
+print(min_time, ans_height)
