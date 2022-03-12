@@ -30,6 +30,7 @@ for h in range(min, max+1):
     time = 0
     break_flag = False
     inventory = B
+    need = 0
     for i in range(len(arr)):
         for j in range(len(arr[i])):
             current = arr[i][j]
@@ -40,19 +41,11 @@ for h in range(min, max+1):
             elif diff > 0:
                 time = time + (diff*remove)
                 inventory = inventory + (abs(diff))
-                print(f'inven: ${inventory}')
             # current land is lower
             else:
-                if inventory < abs(diff):
-                    break_flag = True
-                    break
-                time += (abs(diff)*add)
+                time = time + (abs(diff)*add)
                 inventory -= (abs(diff))
-        if break_flag:
-            break
-    if h == 6:
-        print(min_time, h)
-    if break_flag:
+    if inventory < 0:
         continue
     if time < min_time:
         min_time = time
