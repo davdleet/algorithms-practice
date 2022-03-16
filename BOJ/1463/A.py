@@ -5,36 +5,13 @@ input = sys.stdin.readline
 
 N = int(input().rstrip())
 
-d = {}
+arr = [0 for _ in range(1000001)]
 
+for i in range(2, N+1):
+    arr[i] = arr[i-1] + 1
+    if i % 2 == 0:
+        arr[i] = min(arr[i], arr[i//2]+1)
+    if i % 3 == 0:
+        arr[i] = min(arr[i], arr[i//3]+1)
 
-def search(num, count):
-    if num == 1:
-        return count
-    else:
-        a = 10**9
-        b = 10**9
-        c = 10**9
-        t = 0
-        try:
-            t = d[num/3]
-        except:
-            d[t] = 1
-            if num % 3 == 0:
-                a = search(num / 3, count+1)
-        try:
-            t = d[num/2]
-        except:
-            d[t] = 1
-            if num % 2 == 0:
-                b = search(num / 2, count+1)
-
-        try:
-            t = d[num-1]
-        except:
-            d[t] = 1
-            c = search(num - 1, count+1)
-        return min(a, b, c)
-
-
-print(search(N, 0))
+print(arr[N])
