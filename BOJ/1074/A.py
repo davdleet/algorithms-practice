@@ -9,20 +9,21 @@ size = 2 ** N
 ans = 0
 
 
-def search(size, x, y):
-    ans = size
+def search(s, x, y):
+    global ans
     # base case
     if x == r and y == c:
-
-        return ans
-    if (r >= x and r < x + size) and (c >= y and c < y+size):
-        search(size/2, x, y)
-        search(size/2, x+size/2, y)
-        search(size/2, x, y+size/2)
-        search(size/2, x+size/2, y+size/2)
+        print(ans)
+        sys.exit(0)
+    # within four quadrants
+    if (r >= x and r < x + s) and (c >= y and c < y+s):
+        search(s//2, x, y)
+        search(s//2, x, y+s//2)
+        search(s//2, x+s//2, y)
+        search(s//2, x+s//2, y+s//2)
+    # if not, add size to answer
     else:
-        ans += (size * size)
+        ans = ans + s**2
 
 
 search(size, 0, 0)
-print(size)
