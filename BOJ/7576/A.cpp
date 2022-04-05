@@ -23,7 +23,7 @@ public:
     }
 };
 
-main()
+int main()
 {
     freopen("input.txt", "rt", stdin);
     cin >> M >> N;
@@ -40,15 +40,7 @@ main()
         arr.push_back(temp_vec);
     }
     int day = 0;
-    cout << "test" << endl;
-    for (int i = 0; i < N; i++)
-    {
-        for (int j = 0; j < M; j++)
-        {
-            cout << arr[i][j] << " ";
-        }
-        cout << endl;
-    }
+
     cout << BFS() << endl;
 }
 
@@ -59,13 +51,16 @@ int BFS()
     queue<values> q;
     for (int i = 0; i < arr.size(); i++)
     {
-        for (int j = 0; j < arr.size(); j++)
+        for (int j = 0; j < arr[i].size(); j++)
         {
             if (arr[i][j] == 0)
             {
+                already_ripe = false;
+            }
+            else if (arr[i][j] == 1)
+            {
                 values t = values(i, j, 0);
                 q.push(t);
-                already_ripe = false;
             }
         }
     }
@@ -74,7 +69,6 @@ int BFS()
     {
         return 0;
     }
-
     while (q.size() != 0)
     {
         values current = q.front();
@@ -83,12 +77,11 @@ int BFS()
         int y = current.second;
         int d = current.third;
         ans = d;
-        cout << ans << endl;
         for (int i = 0; i < dir.size(); i++)
         {
             int a = dir[i].first;
             int b = dir[i].second;
-            if ((x + a < 0 || x + a >= N) || (y + b < 0 || y + b >= M) || (arr[x + a][y + b] != 0))
+            if (((x + a) < 0 || (x + a) >= N) || ((y + b) < 0 || (y + b) >= M) || (arr[x + a][y + b] != 0))
             {
                 continue;
             }
@@ -97,16 +90,12 @@ int BFS()
             q.push(t);
         }
     }
-
     for (int i = 0; i < arr.size(); i++)
     {
-        bool break_flag = false;
-        for (int j = 0; j < arr.size(); j++)
+        for (int j = 0; j < arr[i].size(); j++)
         {
             if (arr[i][j] == 0)
-            {
                 return -1;
-            }
         }
     }
     return ans;
