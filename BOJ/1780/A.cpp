@@ -20,11 +20,27 @@ vector<int> divide(int size, int x, int y)
     {
         vector<vector<int>> div;
         int s = int(size / 3);
-        for (int i = 0; i < size; i++)
+        vector<int> ans(3, 0);
+        for (int i = 0; i < dir.size(); i++)
         {
             vector<int> temp = divide(s, x + dir[i].first * s, y + dir[i].second * s);
             div.push_back(temp);
         }
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                ans[j] += div[i][j];
+            }
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            if (ans[i] == (size * size) / (s * s))
+            {
+                ans[i] = 1;
+            }
+        }
+        return ans;
     }
 }
 
@@ -46,14 +62,8 @@ int main()
         }
         arr.push_back(temp);
     }
-    for (int i = 0; i < N; i++)
-    {
-        for (int j = 0; j < N; j++)
-        {
-            cout << arr[i][j] << " ";
-        }
-        cout << endl;
-    }
     vector<int> result = divide(N, 0, 0);
-    cout << result[0] << " " << result[1] << " " << result[2];
+    cout << result[0] << "\n"
+         << result[1] << "\n"
+         << result[2];
 }
