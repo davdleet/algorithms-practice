@@ -6,6 +6,29 @@ vector<vector<int>> arr;
 
 vector<pair<int, int>> dir{{0, 0}, {0, 1}, {0, 2}, {1, 0}, {1, 1}, {1, 2}, {2, 0}, {2, 1}, {2, 2}};
 
+bool check(vector<int> *arr, int idx)
+{
+    if ((*arr)[idx] == 0)
+    {
+        return false;
+    }
+    for (int i = 0; i < 3; i++)
+    {
+        if (i == idx)
+        {
+            continue;
+        }
+        else
+        {
+            if ((*arr)[i] != 0)
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 vector<int> divide(int size, int x, int y)
 {
     if (size == 1)
@@ -35,9 +58,10 @@ vector<int> divide(int size, int x, int y)
         }
         for (int i = 0; i < 3; i++)
         {
-            if (ans[i] == (size * size) / (s * s))
+            if ((ans[i] == (size * size) / (s * s)) && check(&ans, i))
             {
                 ans[i] = 1;
+                break;
             }
         }
         return ans;
