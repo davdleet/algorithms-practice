@@ -22,17 +22,15 @@ for i in range(1, N+1):
             arr[i][k] = min(arr[i][k], arr[i][j] + arr[j][k])
 
 ans = arr[X][Y]
-if N == 1:
-    print(0)
-if ans == 9999:
+if ans >= 9999:
     print(-1)
 else:
     print(ans)
 
-for i in range(1, N+1):
-    for j in range(1, N+1):
-        if arr[i][j] == 9999:
-            print("X", end=" ")
-        else:
-            print((arr[i][j]), end=" ")
-    print()
+# for i in range(1, N+1):
+#     for j in range(1, N+1):
+#         if arr[i][j] == 9999:
+#             print("X", end=" ")
+#         else:
+#             print((arr[i][j]), end=" ")
+#     print()
