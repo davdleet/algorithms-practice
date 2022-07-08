@@ -7,6 +7,13 @@
         "algorithm": "cpp",
         "stack": "cpp",
         "utility": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "string": "cpp",
+        "istream": "cpp",
+        "xtree": "cpp",
+        "queue": "cpp",
+        "xhash": "cpp",
+        "xstddef": "cpp",
+        "map": "cpp"
     }
 }
