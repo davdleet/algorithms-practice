@@ -5,24 +5,23 @@ using namespace std;
 
 vector<int> arr;
 
+// quicksort is too slow as it has O^2 time complexity
 void quicksort(int l, int r)
 {
     if (l >= r)
     {
         return;
     }
-    int start = l;
     int end = r;
     int pivot = l;
-    int m;
-    l = l + 1;
+    l++;
     while (l <= r)
     {
         while (l <= end && arr[l] <= arr[pivot])
         {
             l++;
         }
-        while (r > start && arr[r] >= arr[pivot])
+        while (r > pivot && arr[r] >= arr[pivot])
         {
             r--;
         }
@@ -32,7 +31,6 @@ void quicksort(int l, int r)
             temp = arr[pivot];
             arr[pivot] = arr[r];
             arr[r] = temp;
-            int m = r;
         }
         else
         {
@@ -42,12 +40,14 @@ void quicksort(int l, int r)
             arr[l] = temp;
         }
     }
-    quicksort(start, m - 1);
-    quicksort(m + 1, end);
+    quicksort(pivot, r - 1);
+    quicksort(r + 1, end);
 }
 
 int main()
 {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
     freopen("input.txt", "rt", stdin);
     int N;
     cin >> N;
@@ -57,9 +57,9 @@ int main()
         cin >> temp;
         arr.push_back(temp);
     }
-    quicksort(0, arr.size() - 1);
+    quicksort(0, N - 1);
     for (int i = 0; i < N; i++)
     {
-        cout << arr[i] << endl;
+        cout << arr[i] << "\n";
     }
 }
