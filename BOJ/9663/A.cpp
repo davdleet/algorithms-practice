@@ -6,10 +6,10 @@ using namespace std;
 #define MAX_N 15
 
 vector<int> t(MAX_N + 1, 0);
-vector<vector<int> > arr(MAX_N + 1, t);
-vector<vector<int> > visited(MAX_N + 1, t);
-vector<pair<int, int> > queens;
-vector<pair<int, int> > dir = {{-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}};
+vector<vector<int>> arr(MAX_N + 1, t);
+vector<vector<int>> visited(MAX_N + 1, t);
+vector<pair<int, int>> queens;
+vector<pair<int, int>> dir = {{-1, 0}, {-1, 1}, {0, 1}, {1, 1}, {1, 0}, {1, -1}, {0, -1}, {-1, -1}};
 int N;
 int cnt = 0;
 
@@ -120,6 +120,6 @@ int main()
     visited[1][1] = 1;
     cout << visited[1][1] << endl;
     cout << arr[1][1] << endl;
-    // bruteforce(1, 1);
+    bruteforce(1, 1);
     cout << cnt;
 }
