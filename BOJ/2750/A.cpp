@@ -32,7 +32,6 @@ void merge(int i1, int i2, int end)
     }
     while (idx_2 != end + 1)
     {
-        cout << idx_2 << " " << end;
         result.push_back(arr[idx_2++]);
     }
     int r_idx = 0;

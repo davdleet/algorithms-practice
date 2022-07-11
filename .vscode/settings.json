@@ -14,6 +14,7 @@
         "queue": "cpp",
         "xhash": "cpp",
         "xstddef": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "ios": "cpp"
     }
 }
