@@ -5,6 +5,8 @@ using namespace std;
 int main()
 {
     freopen("input.txt", "rt", stdin);
+    cin.tie(0);
+    ios::sync_with_stdio(0);
     int N, K;
     cin >> N >> K;
     vector<int> arr(N, 0);
@@ -12,7 +14,6 @@ int main()
     for (int i = 0; i < N; i++)
     {
         arr[i] = i + 1;
-        cout << arr[i] << endl;
     }
     int cnt = 0;
     int idx = 0;
@@ -25,11 +26,15 @@ int main()
             remove = arr[idx];
             ans.push_back(remove);
             arr.erase(arr.begin() + idx);
+            if (idx == arr.size())
+            {
+                idx = 0;
+            }
             k = 1;
             cnt++;
             continue;
         }
-        if (idx == arr.size())
+        if (idx + 1 >= arr.size())
         {
             idx = 0;
         }
@@ -38,14 +43,23 @@ int main()
             idx++;
         }
         k++;
-        for (int i = 0; i < arr.size(); i++)
-        {
-            cout << arr[i] << " ";
-        }
-        cout << endl;
+        // for (int i = 0; i < arr.size(); i++)
+        // {
+        //     cout << arr[i] << " ";
+        // }
+        // cout << endl;
     }
+    cout << "<";
     for (int i = 0; i < ans.size(); i++)
     {
-        cout << ans[i] << " ";
+        if (i != ans.size() - 1)
+        {
+            cout << ans[i] << ", ";
+        }
+        else
+        {
+            cout << ans[i];
+        }
     }
+    cout << ">";
 }
