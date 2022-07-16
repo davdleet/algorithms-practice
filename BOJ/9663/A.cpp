@@ -20,6 +20,7 @@ bool test(int x, int y)
     {
         int q_x = queens[i].first;
         int q_y = queens[i].second;
+        // check if row or cols match
         if (x == q_x || y == q_y)
         {
             avail = false;
@@ -46,7 +47,7 @@ void printvis()
     {
         for (int j = 1; j <= N; j++)
         {
-            cout << visited[i][j] << " ";
+            cout << arr[i][j] << " ";
         }
         cout << endl;
     }
@@ -54,72 +55,93 @@ void printvis()
 
 void bruteforce(int x, int y)
 {
-    cout << x << " " << y << endl;
+    cout << "cnt " << cnt << endl;
+    cout << "X AND Y: " << x << " " << y << endl;
     visited[x][y] = 1;
-    printvis();
-    if (test(x, y))
+    // printvis();
+    bool available = test(x, y);
+    if (available)
     {
+        for (int i = 1; i <= N; i++)
+        {
+            for (int j = 1; j <= N; j++)
+            {
+                if (i == x && j == y)
+                {
+                    cout << "x"
+                         << " ";
+                }
+                else
+                {
+                    cout << arr[i][j] << " ";
+                }
+            }
+            cout << "\n";
+        }
         cout << "place" << endl;
         arr[x][y] = 1;
         queens.push_back(make_pair(x, y));
         if (queens.size() == N)
         {
+            cout << "EIGHT" << endl;
             cnt++;
         }
-        for (int i = 0; dir.size(); i++)
+        for (int i = 0; i < dir.size(); i++)
         {
             int a = dir[i].first;
             int b = dir[i].second;
-            cout << x + a << " " << y + b << endl;
-            cout << "test1" << endl;
             if ((x + a > 0) && (x + a <= N) && (y + b > 0) && (y + b <= N) && (visited[x + a][y + b] == 0))
             {
                 bruteforce(x + a, y + b);
             }
-            cout << "end test" << endl;
         }
+        // cout << "pop queen" << endl;
         arr[x][y] = 0;
         queens.pop_back();
-        for (int i = 0; dir.size(); i++)
+        visited[x][y] = 0;
+        for (int i = 0; i < dir.size(); i++)
         {
             int a = dir[i].first;
             int b = dir[i].second;
-            cout << x + a << " " << y + b << endl;
-            cout << "test2" << endl;
-            cout << "visited: " << visited[x + a][y + b] << endl;
             if ((x + a > 0) && (x + a <= N) && (y + b > 0) && (y + b <= N) && (visited[x + a][y + b] == 0))
             {
                 bruteforce(x + a, y + b);
             }
-            cout << "end test" << endl;
         }
     }
     else
     {
-        for (int i = 0; dir.size(); i++)
+        cout << "not avail"
+             << "\n";
+        for (int i = 0; i < dir.size(); i++)
         {
             int a = dir[i].first;
             int b = dir[i].second;
-            cout << x + a << " " << y + b << endl;
-            cout << "test3" << endl;
-            cout << "visited: " << visited[x + a][y + b] << endl;
-            cout << (visited[x + a][y + b] == 0) << endl;
             if ((x + a > 0) && (x + a <= N) && (y + b > 0) && (y + b <= N) && (visited[x + a][y + b] == 0))
             {
                 bruteforce(x + a, y + b);
             }
-            cout << "end test" << endl;
         }
     }
+    cout << endl
+         << endl;
 }
 
 int main()
 {
     freopen("input.txt", "rt", stdin);
     cin >> N;
-    visited[1][1] = 1;
-    cout << visited[1][1] << endl;
-    cout << arr[1][1] << endl;
-    bruteforce(1, 1);
-    cout << cnt;
+    cout << "N: " << N << endl;
+    for (int i = 1; i <= N; i++)
+    {
+        for (int j = 1; j <= N; j++)
+        {
+            bruteforce(i, j);
+            vector<vector<int>> temp(MAX_N + 1, t);
+            vector<pair<int, int>> q;
+            queens = q;
+            visited = temp;
+        }
+    }
+    cout << "cnt: " << cnt;
 }
