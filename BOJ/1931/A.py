@@ -19,6 +19,7 @@ count = 0
 schedule.append(-1)
 for i in range(len(lines)):
     if schedule[-1] <= lines[i][0]:
+        print(lines[i])
         schedule.append(lines[i][1])
         count += 1
 print(count)
