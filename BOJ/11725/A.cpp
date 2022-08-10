@@ -4,17 +4,23 @@
 using namespace std;
 
 vector<int> temp;
+// adjacency list
 vector<vector<int>> arr;
+// mark visited nodes
 vector<int> visited;
+// answers
 vector<int> parents;
+// visit from the root (1) node
 void DFS(int parent, int current)
 {
     visited[current] = 1;
+    // parent of current is previous node
     parents[current] = parent;
     for (int i = 0; i < arr[current].size(); i++)
     {
         if (!visited[arr[current][i]])
         {
+            // visit a connected node if not already visited
             DFS(current, arr[current][i]);
         }
     }
