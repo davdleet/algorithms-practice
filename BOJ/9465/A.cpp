@@ -40,22 +40,27 @@ int main()
         // iterate through all columns;
         for (int j = 1; j < n; j++)
         {
+            // for all options
             for (int k = 0; k < 3; k++)
             {
                 // pick up
                 if (k == 0 || k == 1)
                 {
-                    // find the opposite index of last decision
-                    int opp = 1 - last[k][j - 1];
+                    // find the index of last decision
+                    int last_idx = last[k][j - 1];
+                    int opp = 1 - last_idx;
                     // next idx to choose
                     int choice;
-                    int left = arr[k][j] + dp[opp][j - 1];
+                    // left is picking the opposite side of last dp
+                    int left = arr[opp][j] + dp[k][j - 1];
+                    // right is picking the max of current arr and the option of not picking anything for last dp
                     int right = max(arr[0][j], arr[1][j]) + dp[2][j - 1];
                     if (left >= right)
                     {
                         choice = opp;
                         dp[k][j] = left;
                     }
+                    // right is bigger so dont pick from last dp[0][j-1] and dp[2][j-1]
                     else
                     {
                         if (arr[0][j] > arr[1][j])
@@ -74,7 +79,6 @@ int main()
                     }
                     last[k][j] = choice;
                 }
-                // pick down
                 // pick neither
                 else
                 {
@@ -83,6 +87,5 @@ int main()
             }
         }
         cout << max(dp[0][n - 1], max(dp[1][n - 1], dp[2][n - 1])) << "\n";
-        cout << dp[0][n - 1] << " " << dp[1][n - 1] << " " << dp[2][n - 1];
     }
 }
