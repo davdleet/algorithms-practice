@@ -41,51 +41,18 @@ int main()
         for (int j = 1; j < n; j++)
         {
             // for all options
-            for (int k = 0; k < 3; k++)
+            for (int k = 0; k < 2; k++)
             {
-                // pick up
-                if (k == 0 || k == 1)
+                if (j >= 2)
                 {
-                    // find the index of last decision
-                    int last_idx = last[k][j - 1];
-                    int opp = 1 - last_idx;
-                    // next idx to choose
-                    int choice;
-                    // left is picking the opposite side of last dp
-                    int left = arr[opp][j] + dp[k][j - 1];
-                    // right is picking the max of current arr and the option of not picking anything for last dp
-                    int right = max(arr[0][j], arr[1][j]) + dp[2][j - 1];
-                    if (left >= right)
-                    {
-                        choice = opp;
-                        dp[k][j] = left;
-                    }
-                    // right is bigger so dont pick from last dp[0][j-1] and dp[2][j-1]
-                    else
-                    {
-                        if (arr[0][j] > arr[1][j])
-                        {
-                            choice = 0;
-                        }
-                        else if (arr[0][j] == arr[1][j])
-                        {
-                            choice = opp;
-                        }
-                        else
-                        {
-                            choice = 1;
-                        }
-                        dp[k][j] = right;
-                    }
-                    last[k][j] = choice;
+                    dp[k][j] = max(dp[1 - k][j - 1], max(dp[0][j - 2], dp[1][j - 2])) + arr[k][j];
                 }
-                // pick neither
                 else
                 {
-                    dp[k][j] = max(dp[0][j - 1], dp[1][j - 1]);
+                    dp[k][j] = dp[1 - k][j - 1] + arr[k][j];
                 }
             }
         }
-        cout << max(dp[0][n - 1], max(dp[1][n - 1], dp[2][n - 1])) << "\n";
+        cout << max(dp[0][n - 1], dp[1][n - 1]) << "\n";
     }
 }
