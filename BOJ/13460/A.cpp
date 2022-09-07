@@ -24,7 +24,7 @@ int BFS(int rx, int ry, int bx, int by)
         int dis = dis_q.front();
         if (dis > 10)
         {
-            cout << "over 10\n";
+            // cout << "over 10\n";
             break;
         }
         pair<pair<int, int>, pair<int, int>> current = q.front();
@@ -38,15 +38,15 @@ int BFS(int rx, int ry, int bx, int by)
         // both marbles entered the hole -- not the answer
         if (x1 == X && y1 == Y && x2 == X && y2 == Y)
         {
-            cout << "situation A"
-                 << "\n";
+            // cout << "situation A"
+            //      << "\n";
             continue;
         }
         // blue marble entered the hole but not the red one
         else if (x2 == X && y2 == Y)
         {
-            cout << "situation B"
-                 << "\n";
+            // cout << "situation B"
+            //      << "\n";
             continue;
         }
         // only the red marble entered the hole
@@ -111,7 +111,8 @@ int BFS(int rx, int ry, int bx, int by)
             int nbx = x2;
             int nby = y2;
             // move red marble first
-
+            arr[x1][y1] = 1;
+            arr[x2][y2] = 1;
             if (r_first)
             {
                 while ((nrx + a) >= 1 && (nrx + a) <= N - 2 && (nry + b) >= 1 && (nry + b) <= M - 2 && (arr[nrx + a][nry + b] == 1 || arr[nrx + a][nry + b] == 4))
@@ -146,8 +147,6 @@ int BFS(int rx, int ry, int bx, int by)
             // move blue marble first
             else
             {
-                cout << "lf"
-                     << "\n";
                 while ((nbx + a) >= 1 && (nbx + a) <= N - 2 && (nby + b) >= 1 && (nby + b) <= M - 2 && (arr[nbx + a][nby + b] == 1 || arr[nbx + a][nby + b] == 4))
                 {
                     nbx = nbx + a;
@@ -177,8 +176,6 @@ int BFS(int rx, int ry, int bx, int by)
                 }
             }
         }
-        arr[x1][y1] = 1;
-        arr[x2][y2] = 1;
     }
     return ans;
 }
