@@ -7,9 +7,10 @@ int N;
 
 vector<int> temp;
 vector<vector<int>> arr;
+vector<vector<int>> merged;
+// vector<pair<int, int>> dir = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
 
-vector<pair<int, int>> dir = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
-// vector<pair<int, int>> dir = {{1, 0}};
+vector<pair<int, int>> dir = {{0, -1}};
 int find_biggest()
 {
     queue<pair<int, vector<vector<int>>>> q;
@@ -19,16 +20,18 @@ int find_biggest()
     while (q.size())
     {
         int cnt = q.front().first;
-        if (cnt >= 6)
+        if (cnt >= 1)
         {
             break;
         }
-        vector<vector<int>> map = q.front().second;
+        vector<vector<int>> o_map = q.front().second;
         q.pop();
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 1; i++)
         {
             int a = dir[i].first;
             int b = dir[i].second;
+            vector<vector<int>> map = o_map;
+            vector<vector<int>> check = merged;
             // move horizontally
             if (a == 0)
             {
@@ -64,9 +67,10 @@ int find_biggest()
                                         {
                                             // same values
                                             // we can move to j_idx by merging
-                                            if (val == o_val)
+                                            if (val == o_val && !check[j][k_idx])
                                             {
                                                 merge = true;
+                                                check[j][k_idx] = 1;
                                                 last_idx = k_idx;
                                                 break;
                                             }
@@ -132,9 +136,10 @@ int find_biggest()
                                         {
                                             // same values
                                             // we can move to j_idx by merging
-                                            if (val == o_val)
+                                            if (val == o_val && !check[j][k_idx])
                                             {
                                                 merge = true;
+                                                check[j][k_idx] = 1;
                                                 last_idx = k_idx;
                                                 break;
                                             }
@@ -203,9 +208,11 @@ int find_biggest()
                                         {
                                             // same values
                                             // we can move to j_idx by merging
-                                            if (val == o_val)
+                                            if (val == o_val && !check[j_idx][k])
                                             {
+                                                cout << "merge " << j_idx << " " << k << endl;
                                                 merge = true;
+                                                check[j_idx][k] = 1;
                                                 last_idx = j_idx;
                                                 break;
                                             }
@@ -272,9 +279,10 @@ int find_biggest()
                                         {
                                             // same values
                                             // we can move to j_idx by merging
-                                            if (val == o_val)
+                                            if (val == o_val && !check[j_idx][k])
                                             {
                                                 merge = true;
+                                                check[j_idx][k] = 1;
                                                 last_idx = j_idx;
                                                 break;
                                             }
@@ -310,6 +318,15 @@ int find_biggest()
                 }
             }
             q.push({cnt + 1, map});
+            for (int n = 0; n < N; n++)
+            {
+                for (int m = 0; m < N; m++)
+                {
+                    cout << map[n][m] << " ";
+                }
+                cout << "\n";
+            }
+            cout << "\n";
         }
     }
     return biggest;
@@ -323,6 +340,7 @@ int main()
     cin >> N;
     temp = vector<int>(N, 0);
     arr = vector<vector<int>>(N, temp);
+    merged = vector<vector<int>>(N, temp);
     for (int i = 0; i < N; i++)
     {
         for (int j = 0; j < N; j++)
