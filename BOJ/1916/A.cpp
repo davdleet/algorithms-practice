@@ -48,7 +48,8 @@ int main()
     d = vector<long long>(N + 1, 100000000000000);
     for (int i = 0; i < M; i++)
     {
-        int a, b, c;
+        int a, b;
+        long long c;
         cin >> a >> b >> c;
         bus[a].push_back({c, b});
     }
