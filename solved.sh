@@ -1,0 +1,1 @@
+git add BOJ/$1 && git commit -m "solved $1" && git push
